@@ -3,8 +3,10 @@ import feedparser
 import subprocess
 import shlex
 from xml.etree import ElementTree
+import sys
 
 subscriptions = None
+subFileName = None
 feed = None
 
 def feedName(url):
@@ -18,7 +20,8 @@ def parseRss (url):
 
 def downloadLatestFromOpml(opmlFile):
     global subscriptions
-    with open('subscriptions.opml', 'rt') as f:
+    global subFileName
+    with open(subFileName,'rt') as f:
         tree = ElementTree.parse(f)
     for node in tree.iter('outline'):
         name = node.attrib.get('text')
@@ -37,4 +40,5 @@ def downloadMedia(url, episode):
     command = "youtube-dl " + url
     subprocess.call(shlex.split(command))
 
+subFileName = sys.argv[1]
 downloadLatestFromOpml("subscriptions.opml")
