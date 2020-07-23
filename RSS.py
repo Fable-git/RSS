@@ -42,15 +42,12 @@ def downloadNEpisodesFromOpml(opmlFile, depth):
     while (sum(episodesDownloaded.values()) <= depth):
         for node in opml.iter('outline'):
             if (sum(episodesDownloaded.values()) <= depth):
-                print(depth)
                 name = node.attrib.get('text')
                 url = node.attrib.get('xmlUrl')
                 if name and url:
                     print('{} :: {}'.format(name, url))
                     downloadMedia(url,episodesDownloaded[url])
                     episodesDownloaded[url] += 1
-                    print(episodesDownloaded[url])
-                    print(sum(episodesDownloaded.values()))
 
 def downloadAllEpisodesFromOpml(opmlFile):
     global subscriptions
@@ -99,7 +96,6 @@ def main():
     while(depth.isdigit() != True):
         depth = input("How many episodes would you like to download?: ")
     depth = int(depth)
-    print(depth)
     if (hasOpml):
         if (depth == 0):
             downloadAll = "null"
@@ -131,7 +127,6 @@ def main():
         else:
             depth -= 1
             while depth >= 0:
-                print(depth)
                 downloadMedia(url,depth)
                 depth -= 1
 
