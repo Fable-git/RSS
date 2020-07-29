@@ -78,6 +78,7 @@ def downloadMedia(url, episode):
     subprocess.call(shlex.split(command))
 
 def main():
+
     hasOpml = "null"
     while(type(hasOpml) is not bool):
         hasOpml = input("Do you have an OMPL/XML file for your feeds? y/n: ")
@@ -93,9 +94,11 @@ def main():
     else:
         url = input("Paste the url to your RSS feed: ")
     depth = "null"
+
     while(depth.isdigit() != True):
         depth = input("How many episodes would you like to download?: ")
     depth = int(depth)
+
     if (hasOpml):
         if (depth == 0):
             downloadAll = "null"
